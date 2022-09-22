@@ -1,34 +1,77 @@
 {
     "packages": [
         {
-            "name": "graham-campbell/result-type",
-            "version": "1.0.x-dev",
-            "version_normalized": "1.0.9999999.9999999-dev",
+            "name": "chenall/phalapi",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/GrahamCampbell/Result-Type.git",
-                "reference": "ec4daa4b45faf6a683c9c0acf92fe1377d695a54"
+                "url": "https://github.com/chenall/phalapi.git",
+                "reference": "0c93af245d168824c55f0ed1df2c6c4fea074c59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/ec4daa4b45faf6a683c9c0acf92fe1377d695a54",
-                "reference": "ec4daa4b45faf6a683c9c0acf92fe1377d695a54",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/chenall/phalapi/zipball/0c93af245d168824c55f0ed1df2c6c4fea074c59",
+                "reference": "0c93af245d168824c55f0ed1df2c6c4fea074c59",
+                "shasum": ""
+            },
+            "time": "2020-12-17T06:25:37+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Chenall\\PhalApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "chenall",
+                    "email": "chenall.cn@gmail.com",
+                    "homepage": "http://chenall.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PhalApi 2.x 自用子类扩展",
+            "homepage": "https://www.phalapi.net/",
+            "keywords": [
+                "phalapi",
+                "phalapi-view",
+                "phalapi-扩展"
+            ],
+            "support": {
+                "issues": "https://github.com/chenall/phalapi/issues",
+                "source": "https://github.com/chenall/phalapi/tree/master"
+            },
+            "install-path": "../chenall/phalapi"
+        },
+        {
+            "name": "graham-campbell/result-type",
+            "version": "1.1.x-dev",
+            "version_normalized": "1.1.9999999.9999999-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Result-Type.git",
+                "reference": "a878d45c1914464426dc94da61c9e1d36ae262a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/a878d45c1914464426dc94da61c9e1d36ae262a8",
+                "reference": "a878d45c1914464426dc94da61c9e1d36ae262a8",
+                "shasum": ""
             },
             "require": {
-                "php": "^7.0 || ^8.0",
-                "phpoption/phpoption": "^1.8"
+                "php": "^7.2.5 || ^8.0",
+                "phpoption/phpoption": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5.14 || ^7.5.20 || ^8.5.19 || ^9.5.8"
+                "phpunit/phpunit": "^8.5.28 || ^9.5.21"
             },
-            "time": "2022-02-07T10:52:05+00:00",
+            "time": "2022-07-30T15:56:11+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -58,7 +101,7 @@
             ],
             "support": {
                 "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
-                "source": "https://github.com/GrahamCampbell/Result-Type/tree/1.0"
+                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.1.0"
             },
             "funding": [
                 {
@@ -71,6 +114,60 @@
                 }
             ],
             "install-path": "../graham-campbell/result-type"
+        },
+        {
+            "name": "mustache/mustache",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/mustache.php.git",
+                "reference": "b03b8894906346e7f88a5b7567822937ea91ce00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/b03b8894906346e7f88a5b7567822937ea91ce00",
+                "reference": "b03b8894906346e7f88a5b7567822937ea91ce00",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.11",
+                "phpunit/phpunit": "~3.7|~4.0|~5.0"
+            },
+            "time": "2022-08-23T13:12:39+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Mustache": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Hileman",
+                    "email": "justin@justinhileman.info",
+                    "homepage": "http://justinhileman.com"
+                }
+            ],
+            "description": "A Mustache implementation in PHP.",
+            "homepage": "https://github.com/bobthecow/mustache.php",
+            "keywords": [
+                "mustache",
+                "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/bobthecow/mustache.php/issues",
+                "source": "https://github.com/bobthecow/mustache.php/tree/main"
+            },
+            "install-path": "../mustache/mustache"
         },
         {
             "name": "phalapi/cli",
@@ -127,30 +224,24 @@
         },
         {
             "name": "phalapi/kernal",
-            "version": "2.18.1",
-            "version_normalized": "2.18.1.0",
+            "version": "2.18.4",
+            "version_normalized": "2.18.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalapi/kernal.git",
-                "reference": "856f05ea852ee3619e298ffad7a42a89f74799e6"
+                "reference": "7055d38736517d0c6ad9a6f5263aa85860a814f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalapi/kernal/zipball/856f05ea852ee3619e298ffad7a42a89f74799e6",
-                "reference": "856f05ea852ee3619e298ffad7a42a89f74799e6",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/phalapi/kernal/zipball/7055d38736517d0c6ad9a6f5263aa85860a814f6",
+                "reference": "7055d38736517d0c6ad9a6f5263aa85860a814f6",
+                "shasum": ""
             },
             "require": {
                 "phalapi/notorm": "2.*.*",
                 "php": ">=5.3.3"
             },
-            "time": "2022-07-11T08:58:07+00:00",
+            "time": "2022-08-09T13:59:07+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -188,7 +279,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phalapi/kernal/issues",
-                "source": "https://github.com/phalapi/kernal/tree/2.18.1"
+                "source": "https://github.com/phalapi/kernal/tree/2.18.4"
             },
             "install-path": "../phalapi/kernal"
         },
@@ -303,24 +394,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalapi/task.git",
-                "reference": "552421219a3097a81c576fc2607d96894d489def"
+                "reference": "b68075bdcffe41b6585934e15f73954a5ba42c5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalapi/task/zipball/552421219a3097a81c576fc2607d96894d489def",
-                "reference": "552421219a3097a81c576fc2607d96894d489def",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/phalapi/task/zipball/b68075bdcffe41b6585934e15f73954a5ba42c5c",
+                "reference": "b68075bdcffe41b6585934e15f73954a5ba42c5c",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2018-04-24T14:25:40+00:00",
+            "time": "2022-08-26T03:49:29+00:00",
+            "default-branch": true,
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -334,7 +420,7 @@
             ],
             "authors": [
                 {
-                    "name": "Dogstar Huang",
+                    "name": "dogstar huang",
                     "email": "chanzonghuang@gmail.com",
                     "homepage": "http://my.oschina.net/dogstar",
                     "role": "Developer"
@@ -347,7 +433,65 @@
                 "phalapi-task",
                 "task"
             ],
+            "support": {
+                "issues": "https://github.com/phalapi/task/issues",
+                "source": "https://github.com/phalapi/task/tree/master"
+            },
             "install-path": "../phalapi/task"
+        },
+        {
+            "name": "phalapi/wechatmini",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StormLau/wechatmini.git",
+                "reference": "5baecdf8a72862ed665e0359d11a0f221734c179"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StormLau/wechatmini/zipball/5baecdf8a72862ed665e0359d11a0f221734c179",
+                "reference": "5baecdf8a72862ed665e0359d11a0f221734c179",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2019-01-13T07:24:49+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "PhalApi\\Wechatmini\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "JamesLiu",
+                    "email": "JamesLiu_storm@foxmail.com",
+                    "homepage": "http://blog.jmideas.cn",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PhalApi 2.x 微信小程序扩展",
+            "homepage": "https://www.phalapi.net/",
+            "keywords": [
+                "phalapi",
+                "phalapi-wechatmini",
+                "wechatmini",
+                "小程序",
+                "微信小程序"
+            ],
+            "support": {
+                "issues": "https://github.com/StormLau/wechatmini/issues",
+                "source": "https://github.com/StormLau/wechatmini/tree/master"
+            },
+            "install-path": "../phalapi/wechatmini"
         },
         {
             "name": "phpoption/phpoption",
@@ -356,33 +500,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "5f59b1b59025b3c66cf1ca0898247d9de39c6200"
+                "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/5f59b1b59025b3c66cf1ca0898247d9de39c6200",
-                "reference": "5f59b1b59025b3c66cf1ca0898247d9de39c6200",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+                "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+                "shasum": ""
             },
             "require": {
-                "php": "^7.0 || ^8.0"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4.1",
-                "phpunit/phpunit": "^6.5.14 || ^7.5.20 || ^8.5.19 || ^9.5.8"
+                "bamarni/composer-bin-plugin": "^1.8",
+                "phpunit/phpunit": "^8.5.28 || ^9.5.21"
             },
-            "time": "2021-12-13T23:19:03+00:00",
+            "time": "2022-07-30T15:51:26+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": true
+                },
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "installation-source": "dist",
@@ -416,7 +558,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/php-option/issues",
-                "source": "https://github.com/schmittjoh/php-option/tree/master"
+                "source": "https://github.com/schmittjoh/php-option/tree/1.9.0"
             },
             "funding": [
                 {

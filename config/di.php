@@ -52,6 +52,11 @@ $di->admin = new Portal\Common\Admin();
 //    include_once $pluginFile;
 // }
 
+//PhalApi 2.x 微信小程序扩展
+$di->wechatmini = function() {
+    return new \PhalApi\Wechatmini\Lite();
+};
+
 /** ---------------- 当前项目 定制注册 可选服务组件 ---------------- **/
 
 // 签名验证服务
@@ -76,6 +81,6 @@ $di->admin = new Portal\Common\Admin();
 // };
 
 // 注册扩展的追踪器，将SQL写入日志文件
-// $di->tracer = function() {
-//     return new \App\Common\Tracer();
-// };
+ $di->tracer = function() {
+    return new \App\Common\Tracer();
+ };
