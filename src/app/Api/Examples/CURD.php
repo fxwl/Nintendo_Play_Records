@@ -2,7 +2,7 @@
 
 namespace App\Api\Examples;
 
-use App\Domain\Examples\CURD as DomainCURD;
+use App\Domain\Nintendo\CURD as DomainCURD;
 use PhalApi\Api;
 
 /**
