@@ -14,10 +14,10 @@ return array(
     'servers' => array(
         'db_master' => array(                       // 服务器标记 / database identify
             'type'      => isset($_ENV['PHALAPI_DB_TYPE'])      ? $_ENV['PHALAPI_DB_TYPE']      : 'mysql',                 // 数据库类型，暂时只支持：mysql, sqlserver / database type
-            'host'      => isset($_ENV['PHALAPI_DB_HOST'])      ? $_ENV['PHALAPI_DB_HOST']      : 'localhost',             // 数据库域名 / database host
-            'name'      => isset($_ENV['PHALAPI_DB_NAME'])      ? $_ENV['PHALAPI_DB_NAME']      : 'demo',               // 数据库名字 / database name
-            'user'      => isset($_ENV['PHALAPI_DB_USER'])      ? $_ENV['PHALAPI_DB_USER']      : 'demo',                  // 数据库用户名 / database user
-            'password'  => isset($_ENV['PHALAPI_DB_PASSWORD'])  ? $_ENV['PHALAPI_DB_PASSWORD']  : '123456',                      // 数据库密码 / database password
+            'host'      => isset($_ENV['PHALAPI_DB_HOST'])      ? $_ENV['PHALAPI_DB_HOST']      : '124.222.88.158',             // 数据库域名 / database host
+            'name'      => isset($_ENV['PHALAPI_DB_NAME'])      ? $_ENV['PHALAPI_DB_NAME']      : 'phalapi_ovo_cent',               // 数据库名字 / database name
+            'user'      => isset($_ENV['PHALAPI_DB_USER'])      ? $_ENV['PHALAPI_DB_USER']      : 'PhalApi_ovo_cent',                  // 数据库用户名 / database user
+            'password'  => isset($_ENV['PHALAPI_DB_PASSWORD'])  ? $_ENV['PHALAPI_DB_PASSWORD']  : 'zLcayHSKX2cKFkTk',                      // 数据库密码 / database password
             'port'      => isset($_ENV['PHALAPI_DB_PORT'])      ? $_ENV['PHALAPI_DB_PORT']      : '3306',                  // 数据库端口 / database port
             'charset'   => isset($_ENV['PHALAPI_DB_CHARSET'])   ? $_ENV['PHALAPI_DB_CHARSET']   : 'UTF8',                  // 数据库字符集 / database charset
             'pdo_attr_string'   => false,           // 数据库查询结果统一使用字符串，true是，false否
