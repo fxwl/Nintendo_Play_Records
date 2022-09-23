@@ -11,7 +11,7 @@ class NintendoGURD
 
     public function insert($code)
     {
-        $wx = \PhalApi\DI()->wechatmini->getOpenid('$code');//
+        $wx = \PhalApi\DI()->wechatmini->getOpenid('$code');  //
         curl_close($wx);
         $DomainNintendoInterface = new DomainNintendoInterface();
         $model = new ModelNintendoPlayHistories();
