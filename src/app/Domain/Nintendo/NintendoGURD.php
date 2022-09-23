@@ -9,12 +9,15 @@ use App\Domain\Nintendo\NintendoInterface as DomainNintendoInterface;
 class NintendoGURD
 {
 
-    public function insert($newData,$code)
+    public function insert($code)
     {
-        \PhalApi\DI()->wechatmini->getOpenid('$code');
-        $newData['post_date'] = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+        $wx = \PhalApi\DI()->wechatmini->getOpenid('$code');
+        curl_close($wx);
+        $DomainNintendoInterface = new DomainNintendoInterface();
+        $model = new ModelNintendoPlayHistories();
+        $client_id = $DomainNintendoInterface -> recur('data.openid',$wx);
+        $id = $model->delete($client_id);
 
-        $model = new ModelCURD();
         return $model->insert($newData);
     }
 
