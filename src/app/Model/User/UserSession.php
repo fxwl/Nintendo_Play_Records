@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Model\User;
-
 use PhalApi\Model\NotORMModel as NotORM;
 
-class UserSession extends NotORM
-{
-
+class UserSession extends NotORM {
+    
+    protected function getTableName($id) {
+        return 'phalapi_user_session';
+    }
+    
     /**
      * 带缓存的获取
      */
-    public function getExpiresTime($userId, $token)
-    {
+    public function getExpiresTime($userId, $token) {
         $mcKey = $this->getExpiresTimeMcKey($userId, $token);
         $expiresTime = NULL;
         $cache = \Phalapi\DI()->cache;
@@ -39,13 +40,7 @@ class UserSession extends NotORM
         return $expiresTime;
     }
 
-    protected function getExpiresTimeMcKey($userId, $token)
-    {
-        return sprintf('%s:%s:user_user_session:expires_time', $userId, $token);
-    }
-
-    public function updateExpiresTime($userId, $token, $newExpiresTime)
-    {
+    public function updateExpiresTime($userId, $token, $newExpiresTime) {
         $mcKey = $this->getExpiresTimeMcKey($userId, $token);
         $cache = DI()->cache;
 
@@ -73,8 +68,7 @@ class UserSession extends NotORM
             ->update($data);
     }
 
-    protected function getTableName($id)
-    {
-        return 'phalapi_user_session';
+    protected function getExpiresTimeMcKey($userId, $token) {
+        return sprintf('%s:%s:user_user_session:expires_time', $userId, $token);
     }
 }

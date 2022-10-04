@@ -1,12 +1,10 @@
 <?php
-
 namespace Portal\Domain;
 
 use Portal\Model\Admin as AdminModel;
 use Portal\Model\AdminRole as AdminRoleModel;
 
-class Admin
-{
+class Admin {
 
     const ADMIN_STATE_NORMAL = 1;
     const ADMIN_STATE_BANNED = 0;
@@ -14,8 +12,7 @@ class Admin
     const ADMIN_ROLE_NORMAL = 'admin';
     const ADMIN_ROLE_SUPERMAN = 'super';
 
-    public function login($username, $password)
-    {
+    public function login($username, $password) {
         $model = new AdminModel();
         $admin = $model->getByUsername($username);
 
@@ -36,15 +33,9 @@ class Admin
         \PhalApi\DI()->admin->login($admin['id'], $username, $admin['role']);
 
         return true;
-    }
+    }    
 
-    public function encryptPassword($password, $salt)
-    {
-        return md5(md5(sha1($password . $salt)));
-    }
-
-    public function alterPassword($oldPassword, $newPassword)
-    {
+    public function alterPassword($oldPassword, $newPassword) {
         $model = new AdminModel();
         $admin = $model->get(\PhalApi\DI()->admin->id);
 
@@ -64,8 +55,11 @@ class Admin
         return true;
     }
 
-    public function createAdmin($username, $password, $role = '')
-    {
+    public function encryptPassword($password, $salt) {
+        return md5(md5(sha1($password . $salt)));
+    }
+
+    public function createAdmin($username, $password, $role = '') {
         $model = new AdminModel();
         $admin = $model->getByUsername($username);
 
@@ -87,15 +81,13 @@ class Admin
 
         return true;
     }
-
-    public function getAdminRoles()
-    {
+    
+    public function getAdminRoles() {
         $model = new AdminRoleModel();
         return $model->getList();
     }
-
-    public function getTotalNum()
-    {
+    
+    public function getTotalNum() {
         $model = new AdminModel();
         return intval($model->getTotalNum());
     }

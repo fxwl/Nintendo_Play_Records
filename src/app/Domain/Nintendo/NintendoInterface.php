@@ -2,9 +2,6 @@
 
 namespace App\Domain\Nintendo;
 
-use App\Model\Nintendo\NintendoPlayHistories as ModelNintendoPlayHistories;
-use App\Model\Nintendo\NintendoPlayHistoriesGameTitles as ModelPlayHistoriesGameTitles;
-
 class NintendoInterface
 {
     //在数组中通过key取value
@@ -29,12 +26,9 @@ class NintendoInterface
         $header[] = 'Host:mypage-api.entry.nintendo.co.jp';
         $header[] = 'Authorization:Bearer ' . $Authorization;
 
-        print_r($header);
-
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://mypage-api.entry.nintendo.co.jp/api/v1/users/me/play_histories');
-        //curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_USERAGENT, 'com.nintendo.znej/1.14.0 (Android/7.1.2)');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -47,6 +41,7 @@ class NintendoInterface
         $result = curl_exec($ch);
         curl_close($ch);
 
+        $result = json_decode($result);
 
         return $result;
 
@@ -76,6 +71,7 @@ class NintendoInterface
 
         $result = curl_exec($ch);
         curl_close($ch);
+        $result = json_decode($result);
         return $result;
     }
 

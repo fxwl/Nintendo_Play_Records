@@ -26,31 +26,28 @@ $semanticPath = '/semantic/'; // 本地
     <link rel="stylesheet" href="<?php echo $semanticPath; ?>components/container.min.css">
     <link rel="stylesheet" href="<?php echo $semanticPath; ?>components/message.min.css">
     <link rel="stylesheet" href="<?php echo $semanticPath; ?>components/label.min.css">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <script src="/static/jquery.min.js"></script>
     <script src="/static/jquery.cookie.min.js"></script>
-
-
+    
+        
     <style type="text/css">
-        body {
-            background-color: #DADADA;
-        }
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+    
 
-        body > .grid {
-            height: 100%;
-        }
-
-        .image {
-            margin-top: -100px;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-
-
-    </style>
+  </style>
 </head>
 
 <body>
@@ -77,39 +74,39 @@ $semanticPath = '/semantic/'; // 本地
    </div>
     -->
 
-
+    
 <div class="ui middle aligned center aligned grid">
-    <div class="column">
-        <h2 class="ui image header">
-            <img src="/favicon.ico" alt="pro" class="image">
-            <div class="content">
-                <?php echo $projectName; ?>
-            </div>
-        </h2>
-        <form class="ui large form" method="post">
-            <div class="ui stacked segment">
-                <div class="field">
-                    <label>文档查看密码：</label>
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="view_code" placeholder="请输入查看密码">
-                    </div>
-                </div>
-                <button class="ui fluid large blue submit button">确定</button>
-            </div>
+  <div class="column">
+    <h2 class="ui image header">
+      <img src="/favicon.ico" alt="pro" class="image">
+      <div class="content">
+        <?php echo $projectName; ?>
+      </div>
+    </h2>
+    <form class="ui large form" method="post" >
+      <div class="ui stacked segment">
+        <div class="field">
+            <label>文档查看密码：</label>
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="view_code" placeholder="请输入查看密码">
+          </div>
+        </div>
+        <button class="ui fluid large blue submit button">确定</button>
+      </div>
 
 
-        </form>
+    </form>
 
-        <?php if (!empty($submitError)) { ?>
-            <div class="ui error message"><?php echo $submitError; ?></div>
-        <?php } ?>
-    </div>
+	<?php if (!empty($submitError)) { ?>
+      <div class="ui error message"><?php echo $submitError; ?></div>
+    <?php } ?>
+  </div>
 </div>
 
-</div>
-
-<?php include dirname(__FILE__) . '/api_footer.php'; ?>
+ </div>
+        
+<?php include dirname(__FILE__) . '/api_footer.php';?>
 
 </body>
 </html>

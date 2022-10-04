@@ -1,5 +1,4 @@
 <?php
-
 namespace Portal\Common;
 
 /**
@@ -7,11 +6,9 @@ namespace Portal\Common;
  * @exception 406 管理员未登录
  * @author dogstar 20200307
  */
-class Api extends \PhalApi\Api
-{
+class Api extends \PhalApi\Api {
 
-    protected function userCheck()
-    {
+    protected function userCheck() {
         \PhalApi\DI()->admin->check();
     }
 }

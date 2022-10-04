@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Api\Examples;
 
 use PhalApi\Api;
@@ -7,15 +6,13 @@ use PhalApi\Api;
 /**
  * 日志
  */
-class Log extends Api
-{
+class Log extends Api {
 
     /**
      * 写入日志
      * @desc 演示日志操作，包括写系统异常类日志、业务纪录类日志、开发调试类日志
      */
-    public function run()
-    {
+    public function run() {
         // 系统异常类日志：只有描述
         \PhalApi\DI()->logger->error('fail to insert DB');
 

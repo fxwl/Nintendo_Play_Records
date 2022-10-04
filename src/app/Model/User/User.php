@@ -1,14 +1,14 @@
 <?php
-
 namespace App\Model\User;
-
 use PhalApi\Model\DataModel;
 
-class User extends DataModel
-{
+class User extends DataModel {
 
-    public function getInfo($userId)
-    {
+    protected function getTableName($id) {
+        return 'phalapi_user';
+    }
+
+    public function getInfo($userId) {
         return $this->getORM()->select('*')->where('id = ?', $userId)->fetch();
     }
 
@@ -22,7 +22,7 @@ class User extends DataModel
             return $rs;
         }
 
-        $rows = self::getORM()
+        $rows =self::getORM()
             ->select('id,nickname,avatar')
             ->where('id', $userIds)
             ->fetchAll();
@@ -32,10 +32,5 @@ class User extends DataModel
         }
 
         return $rows;
-    }
-
-    protected function getTableName($id)
-    {
-        return 'phalapi_user';
     }
 }

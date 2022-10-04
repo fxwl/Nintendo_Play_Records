@@ -1,14 +1,12 @@
 <?php
-
 namespace App\Domain\User;
-
 use App\Model\User\UserSession as UserSessionModel;
 
 /**
  * 会话领域类
  */
-class UserSession
-{
+
+class UserSession {
 
     const MAX_EXPIRE_TIME_FOR_SESSION = 2592000;    //一个月
 
@@ -38,16 +36,14 @@ class UserSession
 
         return $token;
     }
-
-    public static function getMaxExpireTime()
-    {
-        return \PhalApi\DI()->config->get('phalapi_user.max_expire_time');
-    }
-
-    public function checkSession($user_id, $token)
-    {
+    
+    public function checkSession($user_id, $token) {
         $model = new UserSessionModel();
         $et = $model->getExpiresTime($user_id, $token);
         return $et > $_SERVER['REQUEST_TIME'] ? true : false;
+    }
+
+    public static function getMaxExpireTime() {
+        return \PhalApi\DI()->config->get('phalapi_user.max_expire_time');
     }
 }

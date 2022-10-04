@@ -16,8 +16,8 @@ return array(
     ),
     //微信小程序注册
     'Wechatmini' => array(
-        'appid' => '你的appid',
-        'secret_key' => '微信小程序后台生成的secret_key，请勿随便修改',
+        'appid' => 'wxf53821909723fe10',
+        'secret_key' => 'de5f69e8b6c94e20a8f032e805805175',
         'mch_id' => '商户号',//不用支付可以不用配置
         'mch_key' => '支付秘钥',//不用支付可以不用配置
     ),

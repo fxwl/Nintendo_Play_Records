@@ -1,19 +1,17 @@
 <?php
-
 namespace App\Api\Examples;
 
-use App\Domain\Nintendo\CURD as DomainCURD;
 use PhalApi\Api;
+use App\Domain\Examples\CURD as DomainCURD;
 
 /**
  * 数据库CURD基本操作示例
  * @author dogstar 20170612
  */
-class CURD extends Api
-{
 
-    public function getRules()
-    {
+class CURD extends Api {
+
+    public function getRules() {
         return array(
             'insert' => array(
                 'title' => array('name' => 'title', 'require' => true, 'min' => 1, 'max' => '20', 'desc' => '标题'),
@@ -45,8 +43,7 @@ class CURD extends Api
      * @desc 向数据库插入一条纪录数据
      * @return int id 新增的ID
      */
-    public function insert()
-    {
+    public function insert() {
         $rs = array();
 
         $newData = array(
@@ -59,7 +56,7 @@ class CURD extends Api
         $id = $domain->insert($newData);
 
         $rs['id'] = $id;
-        return $rs;
+        return $rs; 
     }
 
     /**
@@ -68,8 +65,7 @@ class CURD extends Api
      * @method POST
      * @return int code 更新的结果，1表示成功，0表示无更新，false表示失败
      */
-    public function update()
-    {
+    public function update() {
         $rs = array();
 
         $newData = array(
@@ -86,12 +82,28 @@ class CURD extends Api
     }
 
     /**
+     * 获取数据
+     * @desc 根据ID获取数据库中的一条纪录数据
+     * @method GET
+     * @return int      id          主键ID
+     * @return string   title       标题
+     * @return string   content     内容
+     * @return int      state       状态
+     * @return string   post_date   发布日期
+     */
+    public function get() {
+        $domain = new DomainCURD();
+        $data = $domain->get($this->id);
+
+        return $data;
+    }
+
+    /**
      * 删除数据
      * @desc 根据ID删除数据库中的一条纪录数据
      * @return int code 删除的结果，1表示成功，0表示失败
      */
-    public function delete()
-    {
+    public function delete() {
         $rs = array();
 
         $domain = new DomainCURD();
@@ -102,11 +114,32 @@ class CURD extends Api
     }
 
     /**
+     * 获取分页列表数据
+     * @desc 根据状态筛选列表数据，支持分页
+     * @return array    items   列表数据
+     * @return int      total   总数量
+     * @return int      page    当前第几页
+     * @return int      perpage 每页数量
+     */
+    public function getList() {
+        $rs = array();
+
+        $domain = new DomainCURD();
+        $list = $domain->getList($this->state, $this->page, $this->perpage);
+
+        $rs['items'] = $list['items'];
+        $rs['total'] = $list['total'];
+        $rs['page'] = $this->page;
+        $rs['perpage'] = $this->perpage;
+
+        return $rs;
+    }
+
+    /**
      * 演示如何进行SQL调试和相关的使用
      * @desc 除此接口外，其他示例也可进行在线调试。本示例将便详细说明如何调试。
      */
-    public function sqlDebug()
-    {
+    public function sqlDebug() {
         $rs = array();
 
         // 当需要进行sql调试时，请先开启sys.debug和sys.notorm_debug，设置为true
@@ -129,47 +162,6 @@ class CURD extends Api
 
         // 最后，当sys.notorm_debug和sys.enable_sql_log均开启时，将能在日志文件中纪录sql
         // 如命令：$ tail -f ./runtime/log/201905/20190523.log
-
-        return $rs;
-    }
-
-    /**
-     * 获取数据
-     * @desc 根据ID获取数据库中的一条纪录数据
-     * @method GET
-     * @return int      id          主键ID
-     * @return string   title       标题
-     * @return string   content     内容
-     * @return int      state       状态
-     * @return string   post_date   发布日期
-     */
-    public function get()
-    {
-        $domain = new DomainCURD();
-        $data = $domain->get($this->id);
-
-        return $data;
-    }
-
-    /**
-     * 获取分页列表数据
-     * @desc 根据状态筛选列表数据，支持分页
-     * @return array    items   列表数据
-     * @return int      total   总数量
-     * @return int      page    当前第几页
-     * @return int      perpage 每页数量
-     */
-    public function getList()
-    {
-        $rs = array();
-
-        $domain = new DomainCURD();
-        $list = $domain->getList($this->state, $this->page, $this->perpage);
-
-        $rs['items'] = $list['items'];
-        $rs['total'] = $list['total'];
-        $rs['page'] = $this->page;
-        $rs['perpage'] = $this->perpage;
 
         return $rs;
     }

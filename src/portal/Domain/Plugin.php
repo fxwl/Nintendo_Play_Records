@@ -1,17 +1,15 @@
 <?php
-
 namespace Portal\Domain;
 
 /**
  * 插件应用
  * @author dogstar <huangchanzong@yesapi.cn> 20200311
  */
-class Plugin
-{
 
-    public function uninstall($pluginKey, &$detail = array())
-    {
-        $detail[] = '正在卸载 ' . $pluginKey;
+class Plugin {
+
+    public function uninstall($pluginKey, &$detail = array()) {
+        $detail[] = '正在卸载 '. $pluginKey;
 
         if (!$this->installCheckInstalled($pluginKey, $detail)) {
             $detail[] = '插件未安装，无须卸载';
@@ -48,23 +46,7 @@ class Plugin
         return true;
     }
 
-    protected function installCheckInstalled($pluginKey, &$detail = [])
-    {
-        $jsonFile = $this->getJsonFile($pluginKey);
-        if (file_exists($jsonFile)) {
-            $detail[] = '插件已安装：' . 'plugins/' . $pluginKey . '.json';
-            return true;
-        }
-        return false;
-    }
-
-    protected function getJsonFile($pluginKey)
-    {
-        return API_ROOT . '/plugins/' . $pluginKey . '.json';
-    }
-
-    protected function removeSource($paths, &$detail = array())
-    {
+    protected function removeSource($paths, &$detail = array()) {
         if (is_array($paths)) {
             foreach ($paths as $f) {
                 $detail[] = '开始删除：' . $f;
@@ -78,23 +60,28 @@ class Plugin
         }
     }
 
-    protected function recursiveDelete($dir)
-    {
+    protected function recursiveDelete($dir) {    
         // 打开指定目录
-        if ($handle = @opendir($dir)) {
-            while (($file = readdir($handle)) !== false) {
-                if (($file == ".") || ($file == "..")) {
+        if ($handle = @opendir($dir))
+        {
+            while (($file = readdir($handle)) !== false)
+            {
+                if (($file == ".") || ($file == ".."))
+                {
                     continue;
                 }
-                if (is_dir($dir . '/' . $file)) {
+                if (is_dir($dir . '/' . $file))
+                {
                     // 递归
                     recursiveDelete($dir . '/' . $file);
-                } else {
+                }
+                else
+                {
                     unlink($dir . '/' . $file); // 删除文件
                 }
             }
             @closedir($handle);
-            rmdir($dir);
+            rmdir ($dir); 
         }
     }
 
@@ -104,9 +91,8 @@ class Plugin
      * @param string $detail 安装信息收集
      * @return boolean 安装成功与否
      */
-    public function install($pluginKey, &$detail = array(), $isReinstall = true)
-    {
-        $detail[] = '正在安装 ' . $pluginKey;
+    public function install($pluginKey, &$detail = array(), $isReinstall = true) {
+        $detail[] = '正在安装 '. $pluginKey;
 
         // 检测插件应用是否存在
         $detail[] = '开始检测插件安装包 ' . $pluginKey;
@@ -163,8 +149,7 @@ class Plugin
         return true;
     }
 
-    protected function installCheckExists($pluginKey, &$detail = [])
-    {
+    protected function installCheckExists($pluginKey, &$detail = []) {
         $zipFile = $this->getZipFile($pluginKey);
         if (!file_exists($zipFile)) {
             $detail[] = '插件安装包不存在：' . 'plugins/' . $pluginKey . '.zip';
@@ -173,15 +158,25 @@ class Plugin
         return true;
     }
 
-    protected function getZipFile($pluginKey)
-    {
+    protected function getZipFile($pluginKey) {
         return API_ROOT . '/plugins/' . $pluginKey . '.zip';
     }
 
-    // 只作提示
+    protected function installCheckInstalled($pluginKey, &$detail = []) {
+        $jsonFile = $this->getJsonFile($pluginKey);
+        if (file_exists($jsonFile)) {
+            $detail[] = '插件已安装：' . 'plugins/' . $pluginKey . '.json';
+            return true;
+        }
+        return false;
+    }
 
-    protected function installCheckDepends($plugin_depends, &$detail = [])
-    {
+    protected function getJsonFile($pluginKey) {
+        return API_ROOT . '/plugins/' . $pluginKey . '.json';
+    }
+
+    // 只作提示
+    protected function installCheckDepends($plugin_depends, &$detail = []) {
         if (isset($plugin_depends['PHP'])) {
             $detail[] = sprintf('PHP版本需要：%s，当前为：%s', $plugin_depends['PHP'], PHP_VERSION);
         }
@@ -193,7 +188,7 @@ class Plugin
         }
         if (!empty($plugin_depends['composer'])) {
             foreach ($plugin_depends['composer'] as $pkg => $v) {
-                $detail[] = sprintf('composer需要 %s %s', $pkg, $v);
+                $detail[] = sprintf('composer需要 %s %s', $pkg, $v); 
             }
         }
         if (!empty($plugin_depends['extension'])) {
@@ -202,8 +197,7 @@ class Plugin
         return true;
     }
 
-    protected function installDatabaseUpgrade($pluginKey, &$detail = [])
-    {
+    protected function installDatabaseUpgrade($pluginKey, &$detail = []) {
         $sqlFile = $this->getDataSqlFile($pluginKey);
         if (!file_exists($sqlFile)) {
             $detail[] = '无数据库变更';
@@ -236,13 +230,11 @@ class Plugin
         return true;
     }
 
-    protected function getDataSqlFile($pluginKey)
-    {
+    protected function getDataSqlFile($pluginKey) {
         return API_ROOT . '/data/' . $pluginKey . '.sql';
     }
 
-    public function getMarketPlugins($page = 1, $perpage = 20, $searchParams = array())
-    {
+    public function getMarketPlugins($page = 1, $perpage = 20, $searchParams = array()) {
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
         $url = 'https://www.phalapi.net/plugins.php?' . http_build_query(array('page' => $page, 'perpage' => $perpage, 'searchParams' => json_encode($searchParams), 'host' => $host, 'version' => PHALAPI_VERSION));
         $curl = new \PhalApi\CUrl();
@@ -289,8 +281,7 @@ class Plugin
         return array('total' => $total, 'items' => $items);
     }
 
-    public function getMinePlugins()
-    {
+    public function getMinePlugins() {
         $total = 0;
         $items = array();
 
@@ -319,7 +310,7 @@ class Plugin
                 'plugin_name' => '-',
                 'plugin_author' => '-',
                 'plugin_status' => 0,
-            );
+            );                                
 
         }
 
@@ -328,19 +319,17 @@ class Plugin
 
         return array('total' => $total, 'items' => $items);
     }
-
-    public function getMinePluginsInstallNum()
-    {
+    
+    public function getMinePluginsInstallNum() {
         $total = 0;
         // 加载已安装插件
         foreach (glob(API_ROOT . '/plugins/*.json') as $file) {
-            $total++;
+            $total ++;
         }
         return $total;
     }
 
-    public function marketTopContent()
-    {
+    public function marketTopContent() {
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
         $curl = new \PhalApi\CUrl();
         $result = $curl->get('https://www.phalapi.net/plugins_hot.php', 10000);
@@ -348,7 +337,7 @@ class Plugin
         $moreContent = !empty($result['hot']) ? $result['hot'] : '';
 
         $content = sprintf('<blockquote class="layui-elem-quote">当前网站域名是：%s，PhalApi版本是：v%s。
-            更多精品插件和优质应用，尽在<a href="%s" target="_blank"  class="layui-btn layui-btn-normal layui-btn-sm ">PhalApi插件仓库</a>。%s</blockquote>',
+            更多精品插件和优质应用，尽在<a href="%s" target="_blank"  class="layui-btn layui-btn-normal layui-btn-sm ">PhalApi插件仓库</a>。%s</blockquote>', 
             $host, PHALAPI_VERSION, 'https://gitee.com/dogstar/PhalApi-Net/tree/master/download/plugins', $moreContent);
 
         return $content;

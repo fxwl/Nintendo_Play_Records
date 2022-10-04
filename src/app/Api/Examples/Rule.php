@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Api\Examples;
 
 use PhalApi\Api;
@@ -8,11 +7,9 @@ use PhalApi\Api;
  * 接口参数示例
  * @author dogstar 20190325
  */
-class Rule extends Api
-{
+class Rule extends Api {
 
-    public function getRules()
-    {
+    public function getRules() {
         return array(
             // 字符串
             'str' => array(
@@ -78,8 +75,7 @@ class Rule extends Api
      * 字符串参数
      * @desc 简单的字符串参数
      */
-    public function str()
-    {
+    public function str() {
         return $this->str;
     }
 
@@ -87,8 +83,7 @@ class Rule extends Api
      * 默认且必须的字符串参数
      * @desc 带默认值，并且为必须的字符串参数。默认是string类型，所以一般不用配置type为string。
      */
-    public function defaultStr()
-    {
+    public function defaultStr() {
         return $this->str;
     }
 
@@ -96,8 +91,7 @@ class Rule extends Api
      * 正则字符串参数
      * @desc 指定正则的字符串参数
      */
-    public function regexStr()
-    {
+    public function regexStr() {
         return $this->str;
     }
 
@@ -107,8 +101,7 @@ class Rule extends Api
      * 整数参数
      * @desc 必须的整数参数
      */
-    public function number()
-    {
+    public function number() {
         return $this->number;
     }
 
@@ -116,8 +109,7 @@ class Rule extends Api
      * 指定范围的整数参数
      * @desc 指定范围的整数参数，可以设置最小值、最大值，当设定默认值时，对客户端则不是必传参数。
      */
-    public function rangeNumber()
-    {
+    public function rangeNumber() {
         return $this->number;
     }
 
@@ -127,8 +119,7 @@ class Rule extends Api
      * 开关参数
      * @desc true或false的开关参数。
      */
-    public function trueOrFalse()
-    {
+    public function trueOrFalse() {
         return $this->switch;
     }
 
@@ -138,8 +129,7 @@ class Rule extends Api
      * 日期参数
      * @desc 字符串的日期参数，例如格式：Y-m-d H:i:s
      */
-    public function dateStr()
-    {
+    public function dateStr() {
         return $this->date;
     }
 
@@ -147,8 +137,7 @@ class Rule extends Api
      * 时间戳日期参数
      * @desc 时间戳日期参数，输入日期字符串参数，如传：2019-03-01 00:00:00，接口接收后会转成：1551369600。
      */
-    public function dateTimestamp()
-    {
+    public function dateTimestamp() {
         return $this->date;
     }
 
@@ -158,8 +147,7 @@ class Rule extends Api
      * JSON数组参数
      * @desc 演示如何配置JSON格式的数组参数，并原路返回。
      */
-    public function jsonArray()
-    {
+    public function jsonArray() {
         return array('datas' => $this->datas);
     }
 
@@ -167,8 +155,7 @@ class Rule extends Api
      * 分割的数组参数
      * @desc 以英文逗号分割的数组，并且可以设置数组个数。
      */
-    public function explodeArray()
-    {
+    public function explodeArray() {
         return array('datas' => $this->datas);
     }
 
@@ -178,8 +165,7 @@ class Rule extends Api
      * 枚举参数
      * @desc 例如，男或女的性别参数。
      */
-    public function sexEnum()
-    {
+    public function sexEnum() {
         return $this->sex;
     }
 
@@ -187,8 +173,7 @@ class Rule extends Api
      * 状态枚举参数
      * @desc 对于是数值的枚举范围，注意配置时请用字符串类型。
      */
-    public function statusEnum()
-    {
+    public function statusEnum() {
         return $this->status;
     }
 
@@ -198,8 +183,7 @@ class Rule extends Api
      * 版本回调参数
      * @desc 回调类型的参数，可以自定义参数的检测、转换和校验逻辑。例如版本号。
      */
-    public function versionCallback()
-    {
+    public function versionCallback() {
         return $this->version;
     }
 }
