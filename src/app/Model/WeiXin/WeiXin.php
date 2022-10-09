@@ -13,4 +13,12 @@ class WeiXin extends NotORM
         return 'wx_user_id';
     }
 
+
+    public function getAll($openid)
+    {
+        return $this->getORM()
+            ->select('client_id', 'session_token', 'Authorization')
+            ->where('id', $openid)
+            ->fetchAll();
+    }
 }

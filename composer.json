@@ -22,10 +22,11 @@
     "phalapi/cli": "dev-master",
     "phalapi/task": "dev-master",
     "vlucas/phpdotenv": "5.4.x-dev",
-    "phalapi/wechatmini":"dev-master",
+    "phalapi/wechatmini": "dev-master",
     "ext-curl": "*",
-		"chenall/phalapi": "dev-master",
-		"mustache/mustache": "dev-main"
+    "chenall/phalapi": "dev-master",
+    "mustache/mustache": "dev-main",
+    "ext-json": "*"
   },
   "autoload": {
     "files": [

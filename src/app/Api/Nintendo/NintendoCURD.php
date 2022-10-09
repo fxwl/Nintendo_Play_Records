@@ -16,7 +16,7 @@ class NintendoCURD extends Api
     {
         return array(
             'GetPlayHistories' => array(
-                'Authorization' => array('name' => 'Authorization', 'require' => true, 'desc' => '标识码'),
+                'openid' => array('name' => 'openid', 'require' => true, 'desc' => '标识码'),
             ),
         );
     }
@@ -30,7 +30,7 @@ class NintendoCURD extends Api
     {
         $rs = array();
 
-        $newData = $this->Authorization;
+        $newData = $this->openid;
 
         $domain = new DomainNintendoGURD();
         $GetPlayHistoriesJson = $domain->GetPlayHistories($newData);

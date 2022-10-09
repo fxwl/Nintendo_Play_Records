@@ -25,6 +25,12 @@ class WeiXin
         return $model->get($id);
     }
 
+    public function getAll($id)
+    {
+        $model = new ModelWeiXin();
+        return $model->getAll($id);
+    }
+
     public function delete($id)
     {
         $model = new ModelWeiXin();

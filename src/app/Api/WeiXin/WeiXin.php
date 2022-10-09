@@ -100,8 +100,8 @@ class WeiXin extends Api
     public function get()
     {
         $domain = new DomainWeiXin();
-        $data = $domain->get($this->id);
-
+        //$data = $domain->get($this->id);
+        $data = $domain->getAll($this->id);
         return $data;
     }
 
