@@ -50,4 +50,22 @@ class WeiXin
 
         return $rs;
     }
+
+    public function getAuthorization($id)
+    {
+        $model = new ModelWeiXin();
+        return $model->getAuthorization($id);
+    }
+
+    public function getClientId($id)
+    {
+        $model = new ModelWeiXin();
+        return $model->getClientId($id);
+    }
+
+    public function getSessionToken($id)
+    {
+        $model = new ModelWeiXin();
+        return $model->getSessionToken($id);
+    }
 }
