@@ -40,7 +40,7 @@ class NintendoGURD
             $sessionToken = $DomainNintendoInterface->recur('sessionToken', $wxDate);
             //调用接口获取$Authorization
             $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken, $openId);
-
+            $accessToken = $DomainNintendoInterface->recur('access_token', $PostAuthorization);
             //使用$Authorization获取游戏记录
             $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($accessToken);
         }
