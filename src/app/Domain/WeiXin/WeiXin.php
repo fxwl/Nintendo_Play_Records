@@ -7,65 +7,15 @@ use App\Model\WeiXin\WeiXin as ModelWeiXin;
 class WeiXin
 {
 
-    public function insert($newData)
-    {
-        $model = new ModelWeiXin();
-        return $model->insert($newData);
-    }
-
-    public function update($id, $newData)
-    {
-        $model = new ModelWeiXin();
-        return $model->update($id, $newData);
-    }
-
-    public function get($id)
-    {
-        $model = new ModelWeiXin();
-        return $model->get($id);
-    }
-
     public function getAll($id)
     {
         $model = new ModelWeiXin();
         return $model->getAll($id);
     }
 
-    public function delete($id)
+    public function updateAll($id, $accessToken, $idToken, $clientId, $sessionToken)
     {
         $model = new ModelWeiXin();
-        return $model->delete($id);
-    }
-
-    public function getList($state, $page, $perpage)
-    {
-        $rs = array('items' => array(), 'total' => 0);
-
-        $model = new ModelWeiXin();
-        $items = $model->getListItems($state, $page, $perpage);
-        $total = $model->getListTotal($state);
-
-        $rs['items'] = $items;
-        $rs['total'] = $total;
-
-        return $rs;
-    }
-
-    public function getAuthorization($id)
-    {
-        $model = new ModelWeiXin();
-        return $model->getAuthorization($id);
-    }
-
-    public function getClientId($id)
-    {
-        $model = new ModelWeiXin();
-        return $model->getClientId($id);
-    }
-
-    public function getSessionToken($id)
-    {
-        $model = new ModelWeiXin();
-        return $model->getSessionToken($id);
+        return $model->updateAll($id, $accessToken, $idToken, $clientId, $sessionToken);
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Domain\Nintendo;
+use App\Domain\WeiXin\WeiXin as DomainWeiXin;
 
 class NintendoInterface
 {
     //在数组中通过key取value
-    public function recur($key, $array)
+    public function recur($key, $array): string
     {
         $data = [];
         array_walk_recursive($array, function ($v, $k) use ($key, &$data) {
@@ -139,7 +140,7 @@ class NintendoInterface
     }
 
     //获取Authorization
-    public function PostAuthorization($clientId, $sessionToken)
+    public function PostAuthorization($clientId, $sessionToken, $openId)
     {
         $header = array();
         $header[] = 'Content-Type: application/json';
@@ -173,7 +174,14 @@ class NintendoInterface
         $result = curl_exec($ch);
         curl_close($ch);
 
-        return $result;
+        $arResult = json_decode($result);
+        $accessToken = $this->recur('access_token', $arResult);
+        $idToken = $this->recur('id_token', $arResult);
+
+        $DomainWeiXin = new  DomainWeiXin();
+        $updateAll = $DomainWeiXin->updateAll($openId, $accessToken, $idToken, $clientId, $sessionToken);
+
+        return $arResult;
 
     }
 

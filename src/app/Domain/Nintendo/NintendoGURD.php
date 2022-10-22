@@ -9,64 +9,42 @@ use App\Domain\WeiXin\WeiXin as DomainWeiXin;
 class NintendoGURD
 {
 
-    public function GetPlayHistories($openid)
+    public function GetPlayHistories($openId)
     {
         $DomainWeiXin = new  DomainWeiXin();
         $DomainNintendoInterface = new DomainNintendoInterface();
 
-        $wxDate = $DomainWeiXin->getAll($openid);
+        //获取$Authorization
+        $wxDate = $DomainWeiXin->getAll($openId);
+        $Authorization = $DomainNintendoInterface->recur('accessToken', $wxDate);
 
-        \PhalApi\DI()->logger->log('demo', 'add user exp', array('name' => $wxDate, 'after' => 12));
-
-        $Authorization = $DomainNintendoInterface->recur('Authorization', $wxDate);
-
-        \PhalApi\DI()->logger->log('demo', 'add user exp', array('name' => $Authorization, 'after' => 1));
-
+        //判断$Authorization是否为空
         if ($Authorization != '') {
-
+            //不为空则直接获取游戏记录
             $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($Authorization);
-
-            \PhalApi\DI()->logger->log('demo', 'add user exp', array('$GetPlayHistoriesJson' => $GetPlayHistoriesJson, 'after' => 1));
-
+            //获取返回响应代码，用来判断相应是否成功
             $GetPlayHistoriesJsonCode = $DomainNintendoInterface->recur('code', $GetPlayHistoriesJson);
-
             if ($GetPlayHistoriesJsonCode != '') {
-
-
-                $GetPlayHistoriesJson = $this->getPlayHistoriesJson($DomainNintendoInterface, $wxDate);
-
+                //如果不为空，则代表获取数据失败，即$Authorization失效，这时候需要重新获取$Authorization
+                $clientId = $DomainNintendoInterface->recur('clientId', $wxDate);
+                $sessionToken = $DomainNintendoInterface->recur('sessionToken', $wxDate);
+                //调用接口获取新$Authorization
+                $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken, $openId);
+                $Authorization = $DomainNintendoInterface->recur('access_token', $PostAuthorization);
+                //使用新$Authorization获取游戏记录
+                $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($Authorization);
             }
-
         } else {
-            $GetPlayHistoriesJson = $this->getPlayHistoriesJson($DomainNintendoInterface, $wxDate);
+            //如果为空，则需要获取$Authorization
+            $clientId = $DomainNintendoInterface->recur('clientId', $wxDate);
+            $sessionToken = $DomainNintendoInterface->recur('sessionToken', $wxDate);
+            //调用接口获取$Authorization
+            $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken, $openId);
+
+            //使用$Authorization获取游戏记录
+            $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($accessToken);
         }
 
         return $GetPlayHistoriesJson;
     }
-
-    /**
-     * @param NintendoInterface $DomainNintendoInterface
-     * @param $wxDate
-     * @return mixed
-     */
-    public function getPlayHistoriesJson(NintendoInterface $DomainNintendoInterface, $wxDate)
-    {
-        $clientId = $DomainNintendoInterface->recur('client_id', $wxDate);
-        $sessionToken = $DomainNintendoInterface->recur('session_token', $wxDate);
-
-        \PhalApi\DI()->logger->log('demo', 'add user exp', array('$clientId' => $clientId, '$sessionToken' => $sessionToken));
-
-        $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken);
-        $PostAuthorizationJson = json_decode($PostAuthorization);
-
-        \PhalApi\DI()->logger->log('demo', 'add user exp', array('$PostAuthorizationJson' => $PostAuthorizationJson, '$sessionToken' => $sessionToken));
-
-        $Authorization = $DomainNintendoInterface->recur('access_token', $PostAuthorizationJson);
-
-        \PhalApi\DI()->logger->log('demo', 'add user exp', array('$Authorization' => $Authorization, '$sessionToken' => $sessionToken));
-
-        $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($Authorization);
-        return $GetPlayHistoriesJson;
-    }
-
 }
