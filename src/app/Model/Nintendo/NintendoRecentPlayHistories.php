@@ -28,7 +28,7 @@ class NintendoRecentPlayHistories extends NotORM
 
     public function updateAllRecentPlayHistories($openid, $titleId, $playedDate, $data)
     {
-        $newArr = \PhalApi\Tool::arrayExcludeKeys($data, 'titleId,openId,playedDate,titleId,titleName,imageUrl');
+        $newArr = \PhalApi\Tool::arrayExcludeKeys($data, 'titleId,openId,playedDate');
         return $this->getORM()
             ->where('openId', $openid)
             ->where('titleId', $titleId)

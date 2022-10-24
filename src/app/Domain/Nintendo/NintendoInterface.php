@@ -50,25 +50,26 @@ class NintendoInterface
         //需要插入对应的openId
         $add = ['openId' => $openId];
 
+
+        //更新游戏中数据
+
         //开始添加游戏总数据，下列代码主要用于将$result[playHistories]中每一个数组都添加一个$openId
-        array_walk($result[playHistories], function (&$value, $k, $add) {
+        array_walk($result['playHistories'], function (&$value, $k, $add) {
             $value = array_merge($value, $add);
         }, $add);
 
-//            //更新游戏中数据
-//            $playHistories = $result['playHistories'];
-//            $num = count($playHistories);
-//            $NintendoGURD = new NintendoGURD();
-//            for ($i = '0'; $i < $num; $i++) {
-//                $tempAry = $playHistories[$i];
-//                $code = $NintendoGURD->fetchOnePlayHistories($tempAry[titleId], $tempAry[openId]);
-//                \PhalApi\DI()->logger->info('fetchOne code', array('code' => $code));
-//                if ($code) {
-//                    $NintendoGURD->updateAllPlayHistories($tempAry[openId], $tempAry[titleId], $tempAry);
-//                } else {
-//                    $NintendoGURD->insertMultiPlayHistories($tempAry);
-//                }
-//            }
+        $playHistories = $result['playHistories'];
+        $num = count($playHistories);
+        $NintendoGURD = new NintendoGURD();
+        for ($i = '0'; $i < $num; $i++) {
+            $tempAry = $playHistories[$i];
+            $code = $NintendoGURD->fetchOnePlayHistories($tempAry['titleId'], $tempAry['openId']);
+            if ($code) {
+                $NintendoGURD->updateAllPlayHistories($tempAry['openId'], $tempAry['titleId'], $tempAry);
+            } else {
+                $NintendoGURD->insertMultiPlayHistories($tempAry);
+            }
+        }
 
         //更新最近七天的游戏数据
         $recentPlayHistories = $result['recentPlayHistories'];
@@ -80,24 +81,21 @@ class NintendoInterface
             $add['playedDate'] = $tempAry["playedDate"];
             //只获取当天的游戏列表，剔除时间
             $dailyPlayHistories = $tempAry['dailyPlayHistories'];
-            //插入到游戏列表中
-            $dailyPlayHistories = array_merge($dailyPlayHistories, $add);
 
-            //不知道咋情况$dailyPlayHistories['titleId']获取不到数据，麻了，只能用这种方法获取了
-            $titleId = $this->recur('titleId', $dailyPlayHistories);
-            $openId = $dailyPlayHistories['openId'];
-            $playedDate = $dailyPlayHistories['playedDate'];
-            $code = $NintendoGURD->fetchOneRecentPlayHistories($titleId, $openId, $playedDate);
-            if ($code) {
-                $NintendoGURD->updateAllRecentPlayHistories($openId, $titleId, $playedDate, $dailyPlayHistories);
-            } else {
-                $NintendoGURD->insertMultiRecentPlayHistories($dailyPlayHistories);
+            $tempNum = count($dailyPlayHistories);
+            for ($tempI = '0'; $tempI < $tempNum; $tempI++) {
+                $tempAry1 = array_merge($dailyPlayHistories[$tempI], $add);
+                if (count($tempAry1) > 0) {
+                    $code = $NintendoGURD->fetchOneRecentPlayHistories($tempAry1['titleId'], $tempAry1['openId'], $tempAry1['playedDate']);
+                    if ($code) {
+                        $NintendoGURD->updateAllRecentPlayHistories($tempAry1['openId'], $tempAry1['titleId'], $tempAry1['playedDate'], $tempAry1);
+                    } else {
+                        $NintendoGURD->insertMultiRecentPlayHistories($tempAry1);
+                    }
+                }
             }
         }
-
-
         return $result;
-
     }
 
     //获取玩家信息

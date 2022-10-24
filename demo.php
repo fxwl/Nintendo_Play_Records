@@ -28,25 +28,35 @@ $area = array(
     ),
 );
 
+//
+//$area1 = $area["china"];
+////print_r($area1["北京"]);
+//$add = ['openId' => '1'];
+//
+//$num = count($area1);
+//print_r($num);
+//for ($i = 0; $i <= $num; $i++) {
+//    $tempAry = $area1[$i];
+//
+////    $recentDailyPlayHistories = $tempAry['dailyPlayHistories'];
+//    $add['playedDate'] = $i;
+//    //   print_r($add);
+////    array_walk($tempAry, function (&$value, $k, $add) {
+////        $value = array_merge($value, $add);
+////    }, $add);
+//    $tempAry = array_merge($tempAry, $add);
+//    print_r($tempAry);
+//}
 
-$area1 = $area["china"];
-//print_r($area1["北京"]);
-$add = ['openId' => '1'];
 
-$num = count($area1);
-print_r($num);
-for ($i = 0; $i <= $num; $i++) {
-    $tempAry = $area1[$i];
-
-//    $recentDailyPlayHistories = $tempAry['dailyPlayHistories'];
-    $add['playedDate'] = $i;
-    //   print_r($add);
-//    array_walk($tempAry, function (&$value, $k, $add) {
-//        $value = array_merge($value, $add);
-//    }, $add);
-    $tempAry = array_merge($tempAry, $add);
-    print_r($tempAry);
+$rse = array();
+foreach ($area["china"] as $k => $v) {
+    foreach ($v as $key => $value) {
+        $rse[$key] = $value;
+    }
 }
+
+print_r($rse);
 
 
 

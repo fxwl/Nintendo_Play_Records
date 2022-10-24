@@ -48,7 +48,7 @@ class NintendoGURD
     public function updateAllRecentPlayHistories($openid, $titleId, $playedDate, $data)
     {
         $ModelNintendoRecentPlayHistories = new ModelNintendoRecentPlayHistories();
-        return $ModelNintendoRecentPlayHistories->updateAllPlayHistories($openid, $titleId, $playedDate, $data);
+        return $ModelNintendoRecentPlayHistories->updateAllRecentPlayHistories($openid, $titleId, $playedDate, $data);
     }
 
 }
