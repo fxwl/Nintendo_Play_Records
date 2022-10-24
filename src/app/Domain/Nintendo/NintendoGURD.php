@@ -2,49 +2,53 @@
 
 namespace App\Domain\Nintendo;
 
-use App\Domain\Nintendo\NintendoInterface as DomainNintendoInterface;
-use App\Domain\WeiXin\WeiXin as DomainWeiXin;
-
+use App\Model\Nintendo\NintendoPlayHistories as ModelNintendoPlayHistories;
+use App\Model\Nintendo\NintendoRecentPlayHistories as ModelNintendoRecentPlayHistories;
 
 class NintendoGURD
 {
-
-    public function GetPlayHistories($openId)
+    //游戏数据列表更新函数 NintendoPlayHistories
+    //查询
+    public function fetchOnePlayHistories($titleId, $openId)
     {
-        $DomainWeiXin = new  DomainWeiXin();
-        $DomainNintendoInterface = new DomainNintendoInterface();
-
-        //获取$Authorization
-        $wxDate = $DomainWeiXin->getAll($openId);
-        $Authorization = $DomainNintendoInterface->recur('accessToken', $wxDate);
-
-        //判断$Authorization是否为空
-        if ($Authorization != '') {
-            //不为空则直接获取游戏记录
-            $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($Authorization);
-            //获取返回响应代码，用来判断相应是否成功
-            $GetPlayHistoriesJsonCode = $DomainNintendoInterface->recur('code', $GetPlayHistoriesJson);
-            if ($GetPlayHistoriesJsonCode != '') {
-                //如果不为空，则代表获取数据失败，即$Authorization失效，这时候需要重新获取$Authorization
-                $clientId = $DomainNintendoInterface->recur('clientId', $wxDate);
-                $sessionToken = $DomainNintendoInterface->recur('sessionToken', $wxDate);
-                //调用接口获取新$Authorization
-                $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken, $openId);
-                $Authorization = $DomainNintendoInterface->recur('access_token', $PostAuthorization);
-                //使用新$Authorization获取游戏记录
-                $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($Authorization);
-            }
-        } else {
-            //如果为空，则需要获取$Authorization
-            $clientId = $DomainNintendoInterface->recur('clientId', $wxDate);
-            $sessionToken = $DomainNintendoInterface->recur('sessionToken', $wxDate);
-            //调用接口获取$Authorization
-            $PostAuthorization = $DomainNintendoInterface->PostAuthorization($clientId, $sessionToken, $openId);
-            $accessToken = $DomainNintendoInterface->recur('access_token', $PostAuthorization);
-            //使用$Authorization获取游戏记录
-            $GetPlayHistoriesJson = $DomainNintendoInterface->GetPlayHistories($accessToken);
-        }
-
-        return $GetPlayHistoriesJson;
+        $ModelNintendoPlayHistories = new ModelNintendoPlayHistories();
+        return $ModelNintendoPlayHistories->fetchOnePlayHistories($titleId, $openId);
     }
+
+    //插入
+    public function insertMultiPlayHistories($rows)
+    {
+        $ModelNintendoPlayHistories = new ModelNintendoPlayHistories();
+        return $ModelNintendoPlayHistories->insertMultiPlayHistories($rows);
+    }
+
+    //更新
+    public function updateAllPlayHistories($openid, $titleId, $data)
+    {
+        $ModelNintendoPlayHistories = new ModelNintendoPlayHistories();
+        return $ModelNintendoPlayHistories->updateAllPlayHistories($openid, $titleId, $data);
+    }
+
+    //每日游戏时长更新函数 NintendoRecentPlayHistories
+    //查询
+    public function fetchOneRecentPlayHistories($titleId, $openId, $playedDate)
+    {
+        $ModelNintendoRecentPlayHistories = new ModelNintendoRecentPlayHistories();
+        return $ModelNintendoRecentPlayHistories->fetchOneRecentPlayHistories($titleId, $openId, $playedDate);
+    }
+
+    //插入
+    public function insertMultiRecentPlayHistories($rows)
+    {
+        $ModelNintendoRecentPlayHistories = new ModelNintendoRecentPlayHistories();
+        return $ModelNintendoRecentPlayHistories->insertMultiRecentPlayHistories($rows);
+    }
+
+    //更新
+    public function updateAllRecentPlayHistories($openid, $titleId, $playedDate, $data)
+    {
+        $ModelNintendoRecentPlayHistories = new ModelNintendoRecentPlayHistories();
+        return $ModelNintendoRecentPlayHistories->updateAllPlayHistories($openid, $titleId, $playedDate, $data);
+    }
+
 }

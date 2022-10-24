@@ -2,14 +2,14 @@
 
 namespace App\Api\Nintendo;
 
-use App\Domain\Nintendo\NintendoGURD as DomainNintendoGURD;
+use App\Domain\Nintendo\Nintendo as DomainNintendo;
 use PhalApi\Api;
 
 /**
  * 任天堂游戏接口
  * @author dogstar 20170612
  */
-class NintendoCURD extends Api
+class Nintendo extends Api
 {
 
     public function getRules()
@@ -32,7 +32,7 @@ class NintendoCURD extends Api
 
         $newData = $this->openid;
 
-        $domain = new DomainNintendoGURD();
+        $domain = new DomainNintendo();
         $GetPlayHistoriesJson = $domain->GetPlayHistories($newData);
 
         return $GetPlayHistoriesJson;
