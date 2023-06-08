@@ -11,30 +11,25 @@
 	"authors" : [{
 			"name" : "Dogstar Huang",
 			"email" : "chanzonghuang@gmail.com",
-      "homepage": "http://my.oschina.net/dogstar",
-      "role": "Developer"
-    }
-    ],
-  "require": {
-    "php": ">=7.3",
-    "phalapi/kernal": "2.*.*",
-    "phalapi/qrcode": "dev-master",
-    "phalapi/cli": "dev-master",
-    "phalapi/task": "dev-master",
-    "vlucas/phpdotenv": "5.4.x-dev",
-    "phalapi/wechatmini": "dev-master",
-    "ext-curl": "*",
-    "chenall/phalapi": "dev-master",
-    "mustache/mustache": "dev-main",
-    "ext-json": "*"
-  },
-  "autoload": {
-    "files": [
-      "src/app/functions.php"
-    ],
-    "psr-4": {
-      "App\\": "src/app",
-      "Portal\\": "src/portal"
-    }
-  }
+			"homepage" : "http://my.oschina.net/dogstar",
+			"role" : "Developer"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.3",
+		"phalapi/kernal" : "2.*.*",
+		"phalapi/qrcode" : "dev-master",
+		"phalapi/cli" : "^3.0",
+		"phalapi/task" : "dev-master",
+		"vlucas/phpdotenv": "5.4.x-dev"
+	},
+	"autoload" : {
+		"files" : [
+			"src/app/functions.php"
+		],
+		"psr-4" : {
+			"App\\" : "src/app",
+			"Portal\\" : "src/portal"
+		}
+	}
 }

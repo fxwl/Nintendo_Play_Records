@@ -27,6 +27,10 @@
  * @modify      dogstar         2017-06-17
  */
 
+use PhalApi\Helper\ApiStaticCreate;
+use PhalApi\Helper\ApiList;
+use PhalApi\Helper\ApiDesc;
+
 require_once dirname(__FILE__) . '/init.php';
 
 if (!empty($_GET['language'])) {
@@ -42,19 +46,23 @@ $listTpl = API_ROOT . '/src/view/docs/api_list_tpl.php';
 
 if (substr(PHP_SAPI, 0, 3) == 'cli') {
     // 生成离线文档
-    $apiHtml = new \PhalApi\Helper\ApiStaticCreate($projectName, 'fold', $detailTpl);
+    $apiHtml = new ApiStaticCreate($projectName, 'fold', $detailTpl);
     $apiHtml->render($listTpl);
 } else if (!empty($_GET['detail'])) {
     checkViewCode();
 
     // 接口详情页
-    $apiDesc = new \PhalApi\Helper\ApiDesc($projectName);
+    $apiDesc = new ApiDesc($projectName);
     $apiDesc->render($detailTpl);
 } else {
     checkViewCode();
 
     // 接口列表页
-    $apiList = new \PhalApi\Helper\ApiList($projectName);
+    $apiList = new ApiList(
+        $projectName,                               // 项目名称
+        ApiList::API_CATE_TYPE_API_CLASS_TITLE,     // 菜单分组：按接口自定义名称
+        ApiList::API_LIST_SORT_BY_API_TITLE         // 接口排序：按接口自定义标题
+    );
     $apiList->render($listTpl);
 }
 

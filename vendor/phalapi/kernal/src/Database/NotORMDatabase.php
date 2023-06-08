@@ -130,8 +130,12 @@ class NotORMDatabase /** implements Database */ {
             // 是否在结果集中保持主键作为索引
             $this->_notorms[$notormKey]->isKeepPrimaryKeyIndex = $this->isKeepPrimaryKeyIndex;
 
+            // 追加设置数据库名称
+            $this->_notorms[$notormKey]->dbName = $router['db_name'];
+
             if ($router['isNoSuffix']) {
-                $this->tablenameAliasMap[$name] = $tableName; // 纪录修正的映射关系，来源于小白接口发现的bug
+                // 纪录修正的映射关系，来源于小白接口发现的bug
+                $this->tablenameAliasMap[$name] = $tableName;
                 $name = $tableName;
             }
         } else {
@@ -180,7 +184,7 @@ class NotORMDatabase /** implements Database */ {
      * @throws Exception_InternalServerError
      */
     protected function getDBRouter($tableName, $suffix) {
-        $rs = array('prefix' => '', 'key' => '', 'pdo' => NULL, 'isNoSuffix' => FALSE);
+        $rs = array('db_name' => '', 'prefix' => '', 'key' => '', 'pdo' => NULL, 'isNoSuffix' => FALSE);
 
         if (preg_match('/^(\S+)\.(\S+)$/', $tableName, $match)) {
             $server = $match[1];
@@ -242,19 +246,21 @@ class NotORMDatabase /** implements Database */ {
             );
         }
 
-        $rs['pdo'] = $this->getPdo($dbKey);
+        $rs['db_name'] = isset($this->_configs['servers'][$dbKey]['name']) ? $this->_configs['servers'][$dbKey]['name'] : $rs['db_name'];
         $rs['prefix'] = isset($tableMap['prefix']) ? trim($tableMap['prefix']) : '';
         $rs['key'] = isset($tableMap['key']) ? trim($tableMap['key']) : 'id';
+
+        $rs['pdo'] = $this->getPdo($dbKey);
 
         return $rs;
     }
 
     /**
      * 获取 PDO连接
-     * @param string $dbKey 数据库表名唯一KEY
+     * @param string $dbKey 数据库标志，例如：db_master
      * @return PDO
      */
-    protected function getPdo($dbKey) {
+    public function getPdo($dbKey) {
         if (!isset($this->_pdos[$dbKey])) {
             $dbCfg = isset($this->_configs['servers'][$dbKey]) 
                 ? $this->_configs['servers'][$dbKey] : array();

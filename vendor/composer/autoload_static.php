@@ -26,7 +26,6 @@ class ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80
         array (
             'Portal\\' => 7,
             'PhpOption\\' => 10,
-            'PhalApi\\Wechatmini\\' => 19,
             'PhalApi\\Task\\' => 13,
             'PhalApi\\QrCode\\' => 15,
             'PhalApi\\NotORM\\' => 15,
@@ -36,14 +35,11 @@ class ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
+            'GetOpt\\' => 7,
         ),
         'D' => 
         array (
             'Dotenv\\' => 7,
-        ),
-        'C' => 
-        array (
-            'Chenall\\PhalApi\\' => 16,
         ),
         'A' => 
         array (
@@ -72,10 +68,6 @@ class ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'PhalApi\\Wechatmini\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phalapi/wechatmini/src',
-        ),
         'PhalApi\\Task\\' => 
         array (
             0 => __DIR__ . '/..' . '/phalapi/task/src',
@@ -100,27 +92,17 @@ class ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
+        'GetOpt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ulrichsg/getopt-php/src',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Chenall\\PhalApi\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/chenall/phalapi/src',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/app',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'M' => 
-        array (
-            'Mustache' => 
-            array (
-                0 => __DIR__ . '/..' . '/mustache/mustache/src',
-            ),
         ),
     );
 
@@ -138,7 +120,6 @@ class ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit6835957bc29912b8a4cd2dd758af2e80::$classMap;
 
         }, null, ClassLoader::class);
